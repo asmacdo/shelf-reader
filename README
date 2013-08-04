@@ -1,0 +1,5 @@
+Shelf Reader is a tool for libraries that retrieves call numbers of books 
+from their barcode and determines if they are in the correct order. 
+
+This script interfaces with a required csv file that contains the barcode
+and call number of each book.
