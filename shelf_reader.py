@@ -5,8 +5,9 @@ from sys import argv
 # File name of csc file containing barcodes and call numbers.
 filename = "numbers.csv"
 
-# Opens the csv file containing the catalog. Creates a dictionary from the
-# first two columns of the csv file.
+# Creates a dictionary from a csv file containing the catalog of barcodes in 
+# the first column and call numbers in the second column. Creates a dictionary 
+# from the first two columns of the csv file.
 with open(filename, mode='r') as infile:
     reader = csv.reader(infile)
     call_number_lookup = {rows[0]:rows[1] for rows in reader}
