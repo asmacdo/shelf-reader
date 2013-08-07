@@ -59,9 +59,10 @@ def check_type(c):
 		
 def break_call_number(call_number):
     """
-    Breaks a call number into tokens by grouping like characters (ie letters
-    with letters) and removing spaces. Also ensures that whole numbers should
-    be treated as whole numbers and decimals treated as decimals.
+    Breaks a call number into tokens by inspecting each character of the call
+    number and determining whether the character should be added to the
+    previous token or if it should start a new token. Also adds a decimal to
+    numbers that should be treated as decimals but do not already have one.
     
     :param call_number: the call number to be broken
     
@@ -73,19 +74,24 @@ def break_call_number(call_number):
     next = call_number[0]
 
     for i in range(len(call_number) - 1):
-        c = call_number[i] #the last character inspected
-        d = call_number[i + 1] # the next character to inspect
-        if check_type(c) == check_type(d): # d is part of previous token
+        c = call_number[i]
+        d = call_number[i + 1]
+        if check_type(c) == check_type(d): # d should be added to part of previous token
             next += d
         else:
             if check_type(next) != 2: # Prevents adding a space as a token
-                broken.append(next)
+                broken.append(next) # Adds completed token to the list
 			
-            # Numbers following a letter other than the first letter are 
-            # assumed to be decimals.
             if ((check_type(c) == 0) and (check_type(d) == 1) and (i > 1)):
+                """
+                Numbers following a letter other than the first letter are
+                treated as decimals
+                """
+                
                 d = '0.' + d
-            next = d				
+                
+            next = d
+            
     return broken
 	
 def is_sorted(a, b):
