@@ -1,5 +1,7 @@
-Shelf Reader is a tool for libraries that retrieves call numbers of books 
-from their barcode and determines if they are in the correct order. 
+Shelf Reader is a tool for libraries that retrieves call numbers of items 
+from their barcode and determines if they are in the correct order. This
+allows library staff to quickly and accurately scan their shelves for items
+that are out of place.
 
 This script interfaces with a required csv file that contains the barcode
-and call number of each book.
+and call number of each item. 
