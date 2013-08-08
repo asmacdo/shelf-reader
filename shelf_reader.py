@@ -187,4 +187,4 @@ def main():
         call_b = break_call_number(get_call_number())
     incorrect(call_a, call_b)
 
-#main()
+main()
