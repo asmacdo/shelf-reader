@@ -38,6 +38,8 @@ def get_call_number(call_number_lookup):
         try: 
             return call_number_lookup[barcode]
         except:
+            if barcode.lower() == 'exit':
+                exit()
             print "Invalid barcode, try again"
 
 def check_type(c):
