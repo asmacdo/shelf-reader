@@ -184,7 +184,7 @@ def main():
     while is_correct(call_a, call_b):
         correct(call_a, call_b)
         call_a = call_b
-        call_b = break_call_number(get_call_number())
+        call_b = break_call_number(get_call_number(call_number_lookup))
     incorrect(call_a, call_b)
 
 main()
