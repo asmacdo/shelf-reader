@@ -90,8 +90,10 @@ def break_call_number(call_number):
                 
                 d = '0.' + d
                 
+                
             next = d
             
+    broken.append(next)        
     return broken
 	
 def is_sorted(a, b):
@@ -185,4 +187,4 @@ def main():
         call_b = break_call_number(get_call_number())
     incorrect(call_a, call_b)
 
-main()
+#main()
