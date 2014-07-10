@@ -1,11 +1,11 @@
 import csv
 import re
-from sys import argv
 
 FILE_NAME = "numbers.csv"
 """
 name of csv file with barcodes and call numbers.
 """
+
 
 def create_dictionary(filename):
     """
@@ -20,8 +20,9 @@ def create_dictionary(filename):
     
     with open(filename, mode='r') as infile:   
         reader = csv.reader(infile)
-        return {rows[0]:rows[1] for rows in reader}
-	
+        return {rows[0]: rows[1] for rows in reader}
+
+
 def get_call_number(call_number_lookup):
     """
     Prompts the user for a barcode and returns the appropriate call number. If
@@ -42,6 +43,7 @@ def get_call_number(call_number_lookup):
                 exit()
             print "Invalid barcode, try again"
 
+
 def check_type(c):
     """
     Checks the type of character of the input.
@@ -52,13 +54,14 @@ def check_type(c):
     """
     
     letter_check = re.compile('[a-zA-Z]')
-    if letter_check.match(c): # True if c is a letter
-        return 0 #letter
-    elif (c == ' '):
-        return 2 # space
+    if letter_check.match(c):  # True if c is a letter
+        return 0  # letter
+    elif c == ' ':
+        return 2  # space
     else:
-        return 1 # number
-		
+        return 1  # number
+
+
 def break_call_number(call_number):
     """
     Breaks a call number into tokens by inspecting each character of the call
@@ -72,19 +75,19 @@ def break_call_number(call_number):
                         characters.
     """
     
-    broken = []
-    next = call_number[0]
+    tokens = []
+    new_token = call_number[0]
 
     for i in range(len(call_number) - 1):
         c = call_number[i]
         d = call_number[i + 1]
-        if check_type(c) == check_type(d): # d should be added to part of previous token
-            next += d
+        if check_type(c) == check_type(d):  # d should be added to part of previous token
+            new_token += d
         else:
-            if check_type(next) != 2: # Prevents adding a space as a token
-                broken.append(next) # Adds completed token to the list
-			
-            if ((check_type(c) == 0) and (check_type(d) == 1) and (i > 1)):
+            if check_type(new_token) != 2:  # Prevents adding a space as a token
+                tokens.append(new_token)  # Adds completed token to the list
+
+            if (check_type(c) == 0) and (check_type(d) == 1) and (i > 1):
                 """
                 Numbers following a letter other than the first letter are
                 treated as decimals
@@ -92,12 +95,12 @@ def break_call_number(call_number):
                 
                 d = '0.' + d
                 
-                
-            next = d
+            new_token = d
             
-    broken.append(next)        
-    return broken
-	
+    tokens.append(new_token)        
+    return tokens
+
+
 def is_sorted(a, b):
     """
     Compares two tokens and determines if they are sorted correctly. 
@@ -108,14 +111,17 @@ def is_sorted(a, b):
     
     :returns:   True if the tokens are in the correct order, False otherwise
     """
-    
-    if (check_type(a) == 1): # Number
-        return (a <= b)
-    else: # Letters
+    # If numbers
+    if check_type(a) == 1:
+        return a <= b
+
+    # Else, letters
+    else:
         not_sorted = [a, b]
-        list = [a, b]
-        list.sort()
-        return (list == not_sorted)	
+        tokens = [a, b]
+        tokens.sort()
+        return tokens == not_sorted
+
 
 def is_correct(call_a, call_b):
     """
@@ -134,7 +140,8 @@ def is_correct(call_a, call_b):
                 return False
             return True
     return True
-	
+
+
 def correct(call_a, call_b):
     """
     Informs the user that the order is correct.
@@ -143,7 +150,8 @@ def correct(call_a, call_b):
                     important in later versions.
                     
     :param call_b:  second call number - not used at this time but could be
-                    important in later versions.
+  
+                  important in later versions.
     """
     
     print "_________________________________"
@@ -151,6 +159,7 @@ def correct(call_a, call_b):
     print "|             Correct            |"
     print "|                                |"
     print "|________________________________|"
+
 
 def incorrect(call_a, call_b):
     """
@@ -170,6 +179,7 @@ def incorrect(call_a, call_b):
     print call_a
     print call_b
     print
+    
     
 def main():
     """
