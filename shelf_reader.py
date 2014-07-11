@@ -1,5 +1,4 @@
 import csv
-import re
 
 FILE_NAME = "numbers.csv"
 """
@@ -26,22 +25,27 @@ def create_dictionary(filename):
 def get_call_number(call_number_lookup):
     """
     Prompts the user for a barcode and returns the appropriate call number. If
-    the user inputs a barcode that is not in the dictionary, the user is 
+    the user inputs a barcode that is not in the dictionary, the user is
     prompted again.
-    
+
     :param call_number_lookup:  dictionary of barcodes and call numbers
-    
+
     :returns:                   call number that matches user input barcode
     """
-    
-    while True:
-        barcode = raw_input("Barcode>>>")
-        try: 
-            return call_number_lookup[barcode]
-        except:
-            if barcode.lower() == 'exit':
-                exit()
-            print "Invalid barcode, try again"
+
+    barcode = raw_input("Barcode >>> ")
+
+    while barcode.lower() != 'exit':
+
+        call_number = call_number_lookup.get(barcode)
+
+        if call_number is not None:
+            return call_number
+        else:
+            print "Barcode does not have an associated call number"
+            barcode = raw_input("Barcode >>> ")
+
+    exit()
 
 
 def check_type(c):
@@ -53,8 +57,7 @@ def check_type(c):
     :returns:    0 if letter, 2 if space, or 1 if number
     """
     
-    letter_check = re.compile('[a-zA-Z]')
-    if letter_check.match(c):  # True if c is a letter
+    if c.isalpha():
         return 0  # letter
     elif c == ' ':
         return 2  # space
@@ -101,28 +104,6 @@ def break_call_number(call_number):
     return tokens
 
 
-def is_sorted(a, b):
-    """
-    Compares two tokens and determines if they are sorted correctly. 
-    
-    :param a:   token from the first call number
-    
-    :param b:   token from the second call number
-    
-    :returns:   True if the tokens are in the correct order, False otherwise
-    """
-    # If numbers
-    if check_type(a) == 1:
-        return a <= b
-
-    # Else, letters
-    else:
-        not_sorted = [a, b]
-        tokens = [a, b]
-        tokens.sort()
-        return tokens == not_sorted
-
-
 def is_correct(call_a, call_b):
     """
     Compares two call numbers and determines if they are in the correct order.
@@ -136,7 +117,7 @@ def is_correct(call_a, call_b):
     
     for i in range(len(call_a)):
         if call_a[i] != call_b[i]: 
-            if not is_sorted(call_a[i], call_b[i]):
+            if not call_a[i] <= call_b[i]:
                 return False
             return True
     return True
