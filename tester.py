@@ -1,7 +1,3 @@
-"""
-Before running, comment out main() in shelf_reader.py
-"""
-
 from shelf_reader import *
 import csv
 
