@@ -1,5 +1,4 @@
 import re
-import string
 from utils import check_type, isfloat
 
 
@@ -34,7 +33,7 @@ class Token(object):
         # for all cases involving letters, this will suffice
         return cmp(self.value, other.value)
 
-    def __repr__(self):
+    def __str__(self):
         return self.value
 
 
@@ -81,8 +80,8 @@ class CallNumber(object):
     def __cmp__(self, other):
         return cmp(self.tokens, other.tokens)
 
-    def __repr__(self):
-        return [token.__repr__() for token in self.tokens]
+    def __str__(self):
+        return str([str(token) for token in self.tokens])
 
 
 if __name__ == '__main__':
