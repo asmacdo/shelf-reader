@@ -13,15 +13,24 @@ class Token(object):
 
     @staticmethod
     def _validate(value):
+        """
+        Ensures that a candidate token contains only valid characters and that
+        a single token contains only letters or only numbers
+        :param value: string that will be the value of the token
+        """
         if LEGAL_CHARS.match(value) is None:
-            raise ValueError('you suck')
+            raise ValueError('Contains illegal characters')
+
+        try:
+            float(value)
+        except ValueError:
+            if not value.isalpha():
+                raise ValueError('Token contains letters and numbers')
 
     def __cmp__(self, other):
-        # if I am a float
-        if set(self.value) & set(string.digits):
-            # if other is a float
-            if set(other.value) & set(string.digits):
-                return cmp(float(self.value), float(other.value))
+        # case insensitive for alpha chars
+        if self.value.isalpha() and other.value.isalpha():
+            return cmp(self.value.lower(), other.value.lower())
 
         # for all cases involving letters, this will suffice
         return cmp(self.value, other.value)

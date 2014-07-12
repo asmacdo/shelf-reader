@@ -74,7 +74,7 @@ def break_call_number(call_number):
     
     :param call_number: the call number to be broken
     
-    :returns broken:    a comma seperated list of tokens containing like
+    :returns broken:    a list of tokens containing like
                         characters.
     """
     
