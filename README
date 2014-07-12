@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/asmacdo/shelf-reader.svg?branch=master)](https://travis-ci.org/asmacdo/shelf-reader)
+
 Shelf Reader is a tool for libraries that retrieves call numbers of items 
 from their barcode and determines if they are in the correct order. Because
 it can search by barcode the script allows library staff to connect a 
