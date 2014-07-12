@@ -1,4 +1,3 @@
-import nose
 from unittest import TestCase
 from models import Token
 
