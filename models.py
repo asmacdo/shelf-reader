@@ -16,6 +16,7 @@ class Token(object):
         """
         Ensures that a candidate token contains only valid characters and that
         a single token contains only letters or only numbers
+
         :param value: string that will be the value of the token
         """
         if LEGAL_CHARS.match(value) is None:
@@ -26,7 +27,12 @@ class Token(object):
             raise ValueError('Token contains letters and numbers')
 
     def __cmp__(self, other):
-        # case insensitive for alpha chars
+        """
+        Overrides the default compare, ensures that alpha chars are
+        case agnostic
+
+        :param other: item to compare to
+        """
         if self.value.isalpha() and other.value.isalpha():
             return cmp(self.value.lower(), other.value.lower())
 
@@ -44,6 +50,12 @@ class CallNumber(object):
 
     @staticmethod
     def _validate(value):
+        """
+        Ensures that a candidate call number contains only valid characters
+        and is the appropriate length
+
+        :param value: string representation of a call number
+        """
         if len(value) < 2:
             raise ValueError("Call numbers must be at least two characters")
 
@@ -52,22 +64,36 @@ class CallNumber(object):
 
     @property
     def tokens(self):
+        """
+        Breaks a call number into tokens, which are its atomic parts. A token
+        will contain either letters or a number but not both.
+
+        :return: a list of Token objects
+        """
         tokens_list = []
         new_token = self.value[0]
 
         for i in range(len(self.value) - 1):
             c = self.value[i]
             d = self.value[i + 1]
-            if check_type(c) == check_type(d):  # d should be added to part of previous token
+
+            # d is part of token
+            if check_type(c) == check_type(d):
                 new_token += d
+
+            # d is the beginning of a new token
             else:
-                if check_type(new_token) != 2:  # Prevents adding a space as a token
-                    tokens_list.append(Token(new_token))  # Adds completed token to the list
+                # Prevents adding a space as a token
+                if check_type(new_token) != 2:
+                    tokens_list.append(Token(new_token))
 
                 if (check_type(c) == 0) and (check_type(d) == 1) and (i > 1):
                     """
-                    Numbers following a letter other than the first letter are
-                    treated as decimals
+                    In call number sorting rules, the first number should be
+                    treated as a whole number and all following numbers should
+                    be treated as decimals.
+
+                    For example, M101 K78 would be M, 101, K, 0.78
                     """
 
                     d = '0.' + d
@@ -78,12 +104,11 @@ class CallNumber(object):
         return tokens_list
 
     def __cmp__(self, other):
+        """
+        Compare call numbers by their respective tokens
+        :param other: Call number to compare to
+        """
         return cmp(self.tokens, other.tokens)
 
     def __str__(self):
         return str([str(token) for token in self.tokens])
-
-
-if __name__ == '__main__':
-    pass
-    # do stuff here like get user input and tell them how cool their situation is
