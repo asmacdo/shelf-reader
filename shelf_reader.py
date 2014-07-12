@@ -23,13 +23,13 @@ def create_dictionary(filename):
         return {rows[0]: rows[1] for rows in reader}
 
 
-def get_call_number(bc_call_dict):
+def get_next_callnumber(barcode_dict):
     """
     Prompts the user for a barcode and returns the appropriate call number. If
     the user inputs a barcode that is not in the dictionary, the user is
     prompted again.
 
-    :param bc_call_dict:  dictionary of barcodes and call numbers
+    :param barcode_dict:  dictionary of barcodes and call numbers
 
     :returns:                   call number that matches user input barcode
     """
@@ -38,7 +38,7 @@ def get_call_number(bc_call_dict):
 
     while barcode.lower() != 'exit':
 
-        call_number = bc_call_dict.get(barcode)
+        call_number = barcode_dict.get(barcode)
 
         if call_number is not None:
             return call_number
@@ -96,14 +96,14 @@ def main():
     the user for another barcode.
     """
     
-    bc_call_dict = create_dictionary(FILE_NAME)
-    call_a = CallNumber(get_call_number(bc_call_dict))
-    call_b = CallNumber(get_call_number(bc_call_dict))
+    barcode_dict = create_dictionary(FILE_NAME)
+    call_a = CallNumber(get_next_callnumber(barcode_dict))
+    call_b = CallNumber(get_next_callnumber(barcode_dict))
     
     while call_a < call_b:
         correct(call_a, call_b)
         call_a = call_b
-        call_b = CallNumber(get_call_number(bc_call_dict))
+        call_b = CallNumber(get_next_callnumber(barcode_dict))
     incorrect(call_a, call_b)
 
 if __name__ == "__main__":
