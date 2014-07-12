@@ -34,6 +34,9 @@ class Token(object):
         # for all cases involving letters, this will suffice
         return cmp(self.value, other.value)
 
+    def __repr__(self):
+        return self.value
+
 
 class CallNumber(object):
     def __init__(self, value):
@@ -60,7 +63,7 @@ class CallNumber(object):
                 new_token += d
             else:
                 if check_type(new_token) != 2:  # Prevents adding a space as a token
-                    tokens_list.append(new_token)  # Adds completed token to the list
+                    tokens_list.append(Token(new_token))  # Adds completed token to the list
 
                 if (check_type(c) == 0) and (check_type(d) == 1) and (i > 1):
                     """
@@ -72,11 +75,14 @@ class CallNumber(object):
 
                 new_token = d
 
-        tokens_list.append(new_token)
+        tokens_list.append(Token(new_token))
         return tokens_list
 
     def __cmp__(self, other):
         return cmp(self.tokens, other.tokens)
+
+    def __repr__(self):
+        return [token.__repr__() for token in self.tokens]
 
 
 if __name__ == '__main__':

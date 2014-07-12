@@ -22,11 +22,11 @@ class TestTokens(TestCase):
 
     def test_loc(self):
         call_num = CallNumber('M1624.8 L36N6')
-        self.assertTrue(call_num.tokens == ['M', '1624.8', 'L', '0.36', 'N', '0.6'])
+        self.assertTrue(call_num.__repr__() == ['M', '1624.8', 'L', '0.36', 'N', '0.6'])
 
     def test_dewey(self):
         call_num = CallNumber('001.209 K632')
-        self.assertTrue(call_num.tokens == ['001.209', 'K', '0.632'])
+        self.assertTrue(call_num.__repr__() == ['001.209', 'K', '0.632'])
 
 
 class TestCMP(TestCase):
