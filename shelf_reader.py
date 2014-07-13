@@ -29,7 +29,7 @@ if __name__ == "__main__":
     call_a = CallNumber(get_next_callnumber(barcode_dict))
     call_b = CallNumber(get_next_callnumber(barcode_dict))
 
-    while call_a < call_b:
+    while call_a <= call_b:
         correct(call_a, call_b)
         call_a = call_b
         call_b = CallNumber(get_next_callnumber(barcode_dict))
