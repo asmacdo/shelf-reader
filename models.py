@@ -7,6 +7,10 @@ LEGAL_CHARS = re.compile('^[a-zA-Z0-9 \.]+$')
 
 
 class Token(object):
+    """
+    A part of a call number. A token can be either a decimal number or
+    a string of letters.
+    """
     def __init__(self, value):
         self._validate(value)
         self.value = value

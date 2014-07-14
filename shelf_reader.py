@@ -23,7 +23,7 @@ def create_dictionary(filename):
         return {rows[0]: rows[1] for rows in reader}
 
 
-if __name__ == "__main__":
+def main():
 
     barcode_dict = create_dictionary(FILE_NAME)
     call_a = CallNumber(get_next_callnumber(barcode_dict))
@@ -34,3 +34,7 @@ if __name__ == "__main__":
         call_a = call_b
         call_b = CallNumber(get_next_callnumber(barcode_dict))
     incorrect(call_a, call_b)
+
+if __name__ == "__main__":
+
+    main()
