@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import re
+
 from utils import check_type, isfloat
+
 
 
 # probably needs improvement

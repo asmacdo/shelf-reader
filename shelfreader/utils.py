@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def check_type(value):
     """
     Checks the type of character of the input.

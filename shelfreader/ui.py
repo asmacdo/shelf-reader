@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 def correct(call_a, call_b):
     """
     Informs the user that the order is correct.

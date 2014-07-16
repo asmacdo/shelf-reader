@@ -1,5 +1,6 @@
 from unittest import TestCase
-from models import Token
+
+from shelfreader.models import Token
 
 
 class TestValidate(TestCase):
