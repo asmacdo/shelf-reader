@@ -1,11 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import csv
+import sys
+
 from models import CallNumber
 from ui import incorrect, correct, get_next_callnumber
-
-FILE_NAME = "numbers.csv"
-"""
-name of csv file with barcodes and call numbers.
-"""
 
 
 def create_dictionary(filename):
@@ -25,7 +25,7 @@ def create_dictionary(filename):
 
 def main():
 
-    barcode_dict = create_dictionary(FILE_NAME)
+    barcode_dict = create_dictionary(sys.argv[1])
     call_a = CallNumber(get_next_callnumber(barcode_dict))
     call_b = CallNumber(get_next_callnumber(barcode_dict))
 
@@ -33,6 +33,7 @@ def main():
         correct(call_a, call_b)
         call_a = call_b
         call_b = CallNumber(get_next_callnumber(barcode_dict))
+
     incorrect(call_a, call_b)
 
 if __name__ == "__main__":
