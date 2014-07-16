@@ -20,9 +20,9 @@ file numbers.csv or adjust the name in shelf_reader.py.
 The project requires no depenencies (except nose if you want to run the tests). 
 Make sure that you have python installed (tested for 2.6 and 2.7). 
 
-To run, from the project directory:
+To run:
 
-    python shelf_reader.py
+    ./shelf_reader.py path/to/filename.csv
     
 To run the tests:
 
