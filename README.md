@@ -14,8 +14,7 @@ source implementation.
 ###Use
 
 Get a dump of barcodes and call numbers and save them in a csv file with
-barcodes in the left column and call numbers in the right. Either name the
-file numbers.csv or adjust the name in shelf_reader.py. 
+barcodes in the left column and call numbers in the right. 
 
 The project requires no depenencies (except nose if you want to run the tests). 
 Make sure that you have python installed (tested for 2.6 and 2.7). 
