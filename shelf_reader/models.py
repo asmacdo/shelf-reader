@@ -52,6 +52,9 @@ class Token(object):
 
 
 class CallNumber(object):
+    """ Call number is a collection of independent tokens.
+    """
+
     def __init__(self, value):
         self._validate(value)
         self.value = value
