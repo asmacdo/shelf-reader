@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from shelfreader.models import CallNumber
+from shelf_reader.models import CallNumber
 
 
 class TestValidate(TestCase):
