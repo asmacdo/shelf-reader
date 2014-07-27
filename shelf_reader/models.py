@@ -2,7 +2,7 @@
 
 import re
 
-from utils import check_type, isfloat
+from .utils import check_type, isfloat
 
 
 
@@ -34,7 +34,7 @@ class Token(object):
         if not isfloat(value) and not value.isalpha():
             raise ValueError('Token contains letters and numbers')
 
-    def __cmp__(self, other):
+    def __le__(self, other):
         """
         Overrides the default compare, ensures that alpha chars are
         case agnostic
@@ -42,10 +42,10 @@ class Token(object):
         :param other: item to compare to
         """
         if self.value.isalpha() and other.value.isalpha():
-            return cmp(self.value.lower(), other.value.lower())
+            return self.value.lower() <= other.value.lower()
 
         # for all cases involving letters, this will suffice
-        return cmp(self.value, other.value)
+        return self.value <= other.value
 
     def __str__(self):
         return self.value
@@ -114,12 +114,12 @@ class CallNumber(object):
         tokens_list.append(Token(new_token))
         return tokens_list
 
-    def __cmp__(self, other):
+    def __le__(self, other):
         """
         Compare call numbers by their respective tokens
         :param other: Call number to compare to
         """
-        return cmp(self.tokens, other.tokens)
+        return self.tokens <= other.tokens
 
     def __str__(self):
         return str([str(token) for token in self.tokens])

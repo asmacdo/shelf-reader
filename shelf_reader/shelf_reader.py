@@ -4,8 +4,8 @@
 import csv
 import sys
 
-from models import CallNumber
-from ui import incorrect, correct, get_next_callnumber
+from .models import CallNumber
+from .ui import incorrect, correct, get_next_callnumber
 
 
 def create_dictionary(filename):
