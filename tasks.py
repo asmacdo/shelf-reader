@@ -3,6 +3,10 @@ import os
 from invoke import task, run
 
 @task
+def readme(browse=False):
+    run('rst2html.py README.rst > README.html')
+
+@task
 def publish(test=False):
     """Publish to the cheeseshop."""
     if test:

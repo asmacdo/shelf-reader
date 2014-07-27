@@ -28,7 +28,7 @@ setup(
     name='shelf-reader',
     version=__version__,
     description='Make sure your collections are in call number order.',
-    long_description=(read("README.md")),
+    long_description=(read("README.rst")),
     author='Austin Macdonald',
     author_email='asmacdo@gmail.com',
     url='https://github.com/asmacdo/shelf-reader',
