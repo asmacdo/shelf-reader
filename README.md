@@ -11,6 +11,10 @@ This concept is not new, it has probably been around since libraries began
 to digitize their records, but I have not been able to find a free open 
 source implementation.
 
+###Install
+
+    pip install shelf-reader
+
 ###Use
 
 Get a dump of barcodes and call numbers and save them in a csv file with
@@ -21,8 +25,4 @@ Make sure that you have python installed (tested for 2.6 and 2.7).
 
 To run:
 
-    ./shelf_reader.py path/to/filename.csv
-    
-To run the tests:
-
-    python run_tests.py
+    shelf-reader path/to/filename.csv
