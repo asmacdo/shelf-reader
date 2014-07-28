@@ -4,8 +4,8 @@
 import csv
 import sys
 
-from models import CallNumber
-from ui import incorrect, correct, get_next_callnumber
+from .models import CallNumber
+from .ui import incorrect, correct, get_next_callnumber
 
 
 def create_dictionary(filename):
@@ -28,10 +28,10 @@ def main():
     try:
         barcode_dict = create_dictionary(sys.argv[1])
     except IndexError:
-        print "Please specify a file containing barcodes and call numbers"
+        print("Please specify a file containing barcodes and call numbers")
         exit(1)
     except IOError:
-        print "File " + sys.argv[1] + " not found"
+        print("File " + sys.argv[1] + " not found")
         exit(1)
 
     call_a = CallNumber(get_next_callnumber(barcode_dict))

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import re
-
-from utils import check_type, isfloat
+from .mixins import ComparableMixin 
+from .utils import check_type, isfloat
 
 
 
@@ -10,7 +10,7 @@ from utils import check_type, isfloat
 LEGAL_CHARS = re.compile('^[a-zA-Z0-9 \.]+$')
 
 
-class Token(object):
+class Token(ComparableMixin):
     """
     A part of a call number. A token can be either a decimal number or
     a string of letters.
@@ -34,24 +34,17 @@ class Token(object):
         if not isfloat(value) and not value.isalpha():
             raise ValueError('Token contains letters and numbers')
 
-    def __cmp__(self, other):
-        """
-        Overrides the default compare, ensures that alpha chars are
-        case agnostic
-
-        :param other: item to compare to
-        """
-        if self.value.isalpha() and other.value.isalpha():
-            return cmp(self.value.lower(), other.value.lower())
-
-        # for all cases involving letters, this will suffice
-        return cmp(self.value, other.value)
+    def _cmpkey(self):
+        """Return the key used for comparison"""
+        if isfloat(self.value):
+            return self.value
+        return self.value.lower()
 
     def __str__(self):
         return self.value
 
 
-class CallNumber(object):
+class CallNumber(ComparableMixin):
     """ Call number is a collection of independent tokens.
     """
 
@@ -114,12 +107,10 @@ class CallNumber(object):
         tokens_list.append(Token(new_token))
         return tokens_list
 
-    def __cmp__(self, other):
-        """
-        Compare call numbers by their respective tokens
-        :param other: Call number to compare to
-        """
-        return cmp(self.tokens, other.tokens)
+    def _cmpkey(self):
+        """Return the key used for comparison"""
+        return self.tokens
+
 
     def __str__(self):
         return str([str(token) for token in self.tokens])

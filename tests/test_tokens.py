@@ -44,6 +44,6 @@ class TestCmp(TestCase):
     def test_capital_agnostic(self):
         a = Token('a')
         b = Token('A')
-        self.assertFalse(a < b)
+        self.assertTrue(a <= b)
         self.assertFalse(a > b)
 

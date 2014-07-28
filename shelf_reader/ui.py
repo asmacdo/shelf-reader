@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
+from .compat import user_input
 
 def correct(call_a, call_b):
     """
@@ -12,11 +14,11 @@ def correct(call_a, call_b):
                   important in later versions.
     """
 
-    print "_________________________________"
-    print "|                                |"
-    print "|             Correct            |"
-    print "|                                |"
-    print "|________________________________|"
+    print("_________________________________")
+    print("|                                |")
+    print("|             Correct            |")
+    print("|                                |")
+    print("|________________________________|")
 
 
 def incorrect(call_a, call_b):
@@ -29,14 +31,14 @@ def incorrect(call_a, call_b):
     :param call_b:  second call number
     """
 
-    print "_________________________________"
-    print "|                                |"
-    print "|             Incorrect          |"
-    print "|                                |"
-    print "|________________________________|"
-    print call_a
-    print call_b
-    print
+    print("_________________________________")
+    print("|                                |")
+    print("|             Incorrect          |")
+    print("|                                |")
+    print("|________________________________|")
+    print(call_a)
+    print(call_b)
+    print()
 
 
 def get_next_callnumber(barcode_dict):
@@ -50,7 +52,7 @@ def get_next_callnumber(barcode_dict):
     :returns:                   call number that matches user input barcode
     """
 
-    barcode = raw_input("Barcode >>> ")
+    barcode = user_input("Barcode >>> ")
 
     while barcode.lower() != 'exit':
 
@@ -59,7 +61,7 @@ def get_next_callnumber(barcode_dict):
         if call_number is not None:
             return call_number
         else:
-            print "Barcode does not have an associated call number"
+            print("Barcode does not have an associated call number")
             barcode = raw_input("Barcode >>> ")
 
     exit()
