@@ -35,6 +35,7 @@ class Token(ComparableMixin):
             raise ValueError('Token contains letters and numbers')
 
     def _cmpkey(self):
+        """Return the key used for comparison"""
         if isfloat(self.value):
             return self.value
         return self.value.lower()
@@ -107,7 +108,7 @@ class CallNumber(ComparableMixin):
         return tokens_list
 
     def _cmpkey(self):
-
+        """Return the key used for comparison"""
         return self.tokens
 
 
